@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { ArrowDown, FileDown, Calendar } from "lucide-react";
-import { Link } from "react-router-dom";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
@@ -59,10 +58,8 @@ const HeroSection = () => {
           transition={{ duration: 1, delay: 0.5 }}
           className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-6"
         >
+          <span className="text-gradient-gold">Developer.</span>{" "}
           <span className="text-foreground">Educator.</span>{" "}
-          <span className="text-gradient-gold">Musician.</span>
-          <br />
-          <span className="text-foreground">Technologist.</span>{" "}
           <span className="text-gradient-gold">Creator.</span>
         </motion.h1>
 
@@ -72,7 +69,7 @@ const HeroSection = () => {
           transition={{ duration: 1, delay: 0.7 }}
           className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed"
         >
-          A multidisciplinary professional bridging education, music, technology, and craftsmanship
+          A multidisciplinary professional bridging development, education, and creativity
           — building meaningful connections across every domain.
         </motion.p>
 
@@ -82,12 +79,6 @@ const HeroSection = () => {
           transition={{ duration: 1, delay: 0.9 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Link
-            to="/mywork"
-            className="px-8 py-4 bg-primary text-primary-foreground font-sans font-semibold text-sm tracking-wider uppercase rounded-full hover:shadow-[0_0_30px_-5px_hsl(38_65%_55%/0.4)] transition-all duration-500"
-          >
-            View My Work
-          </Link>
           <a
             href="#cv"
             className="group px-8 py-4 border border-border text-foreground font-sans font-semibold text-sm tracking-wider uppercase rounded-full hover:border-primary/50 transition-all duration-500 flex items-center gap-2"
