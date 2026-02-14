@@ -21,14 +21,23 @@ const CVSection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button className="group px-8 py-4 bg-primary text-primary-foreground font-sans font-semibold text-sm tracking-wider uppercase rounded-full hover:shadow-[0_0_30px_-5px_hsl(38_65%_55%/0.4)] transition-all duration-500 flex items-center gap-3">
+            <a
+              href="/Shaan_Wocker_CV.pdf"
+              download="Shaan_Wocker_CV.pdf"
+              className="group px-8 py-4 bg-primary text-primary-foreground font-sans font-semibold text-sm tracking-wider uppercase rounded-full hover:shadow-[0_0_30px_-5px_hsl(38_65%_55%/0.4)] transition-all duration-500 flex items-center gap-3"
+            >
               <FileDown size={18} className="group-hover:animate-bounce" />
               Download CV
-            </button>
-            <button className="group px-8 py-4 border border-border text-foreground font-sans font-semibold text-sm tracking-wider uppercase rounded-full hover:border-primary/50 transition-all duration-500 flex items-center gap-3">
+            </a>
+            <a
+              href="/Shaan_Wocker_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group px-8 py-4 border border-border text-foreground font-sans font-semibold text-sm tracking-wider uppercase rounded-full hover:border-primary/50 transition-all duration-500 flex items-center gap-3"
+            >
               <Eye size={18} className="group-hover:text-primary transition-colors" />
               Preview CV
-            </button>
+            </a>
           </div>
         </motion.div>
       </div>
