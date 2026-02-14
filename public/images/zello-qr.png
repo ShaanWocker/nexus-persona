@@ -1,0 +1,12 @@
+<svg width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="300" fill="#f5f5f5"/>
+  <text x="150" y="140" font-family="Arial" font-size="16" fill="#666" text-anchor="middle">
+    Zello QR Code
+  </text>
+  <text x="150" y="165" font-family="Arial" font-size="12" fill="#999" text-anchor="middle">
+    Replace this placeholder with
+  </text>
+  <text x="150" y="180" font-family="Arial" font-size="12" fill="#999" text-anchor="middle">
+    the actual Zello QR code image
+  </text>
+</svg>
