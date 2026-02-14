@@ -79,11 +79,7 @@ const MyWork = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isProjectsInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="glass-card p-6 cursor-pointer hover-lift group relative overflow-hidden"
-                onClick={(e) => {
-                  // Placeholder - prevent navigation until real URLs are added
-                  e.preventDefault();
-                }}
+                className="glass-card p-6 hover-lift group relative overflow-hidden cursor-not-allowed"
                 role="article"
                 aria-label={`${project.title} - Coming soon`}
               >
