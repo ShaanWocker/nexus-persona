@@ -39,9 +39,13 @@ const ContactSection = () => {
   const [copied, setCopied] = useState<string | null>(null);
 
   const copyToClipboard = async (text: string, label: string) => {
-    await navigator.clipboard.writeText(text);
-    setCopied(label);
-    setTimeout(() => setCopied(null), 2000);
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(label);
+      setTimeout(() => setCopied(null), 2000);
+    } catch (error) {
+      console.error('Failed to copy to clipboard:', error);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -149,6 +153,7 @@ const ContactSection = () => {
             <button
               type="submit"
               disabled={isSubmitting}
+              aria-busy={isSubmitting}
               className="group w-full px-8 py-4 bg-primary text-primary-foreground font-sans font-semibold text-sm tracking-wider uppercase rounded-full hover:shadow-[0_0_30px_-5px_hsl(38_65%_55%/0.4)] transition-all duration-500 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? 'Sending...' : 'Send Message'}
@@ -325,7 +330,7 @@ const ContactSection = () => {
           </DialogHeader>
           <div className="flex justify-center py-4">
             <img
-              src="/images/zello-qr.png"
+              src="/images/zello-qr.svg"
               alt="Zello QR Code"
               className="w-full max-w-sm rounded-lg"
             />
