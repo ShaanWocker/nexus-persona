@@ -3,12 +3,11 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 
 const milestones = [
-  { year: "2010", title: "Education Career Begins", description: "Started journey in adult learning and educational development." },
-  { year: "2013", title: "Music & Performance", description: "Expanded into music performance and production." },
-  { year: "2016", title: "Ham Radio Certified", description: "Obtained amateur radio license, joining the global communications community." },
-  { year: "2018", title: "Tech & Development", description: "Dove deep into software development and emerging technologies." },
-  { year: "2020", title: "Leather Craft Artisan", description: "Launched handcrafted leather goods combining traditional and modern techniques." },
-  { year: "2023", title: "Real Estate Ventures", description: "Expanded expertise into real estate investment and property development." },
+  { year: "Current", title: "Thrive Academy 🎓 & Algorithmics 💻", description: "Working at Thrive Academy & Algorithmics in Durbanville, empowering students through education and technology." },
+  { year: "2023", title: "Trustlink Africa 🔗", description: "Contributed to building digital solutions connecting African businesses and facilitating growth across the continent." },
+  { year: "2022", title: "Cyclonic Media 🌪️", description: "Helped create dynamic media experiences and digital content strategies for diverse clients." },
+  { year: "2020", title: "Bercliff Estates 🏘️", description: "Supported real estate operations and property management, enhancing client experiences and property value." },
+  { year: "2016", title: "Campus of Performing Arts 🎭", description: "Fostered creative development and performance education, nurturing artistic talent and expression." },
 ];
 
 const AboutSection = () => {

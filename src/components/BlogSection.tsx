@@ -1,13 +1,60 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { ArrowRight, Clock, X, Tag, ChevronLeft } from "lucide-react";
+import { ArrowRight, Clock, X, Tag, ChevronLeft, Share2, Twitter, Linkedin, Facebook, Link } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { posts } from "@/data/posts";
+import { generateSlug } from "@/utils/slugify";
+
+type SocialPlatform = 'twitter' | 'linkedin' | 'facebook';
 
 const BlogSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [selectedPost, setSelectedPost] = useState<typeof posts[0] | null>(null);
+  const [copySuccess, setCopySuccess] = useState(false);
+
+  // Handle copy link to clipboard
+  const handleCopyLink = () => {
+    if (selectedPost) {
+      const slug = generateSlug(selectedPost.title);
+      const url = `${window.location.origin}/blog#${slug}`;
+      navigator.clipboard.writeText(url)
+        .then(() => {
+          setCopySuccess(true);
+          setTimeout(() => setCopySuccess(false), 2000);
+        })
+        .catch((err) => {
+          console.error('Failed to copy link:', err);
+        });
+    }
+  };
+
+  // Handle social media sharing
+  const handleShare = (platform: SocialPlatform) => {
+    if (!selectedPost) return;
+    
+    const slug = generateSlug(selectedPost.title);
+    const url = `${window.location.origin}/blog#${slug}`;
+    const text = selectedPost.title;
+    
+    let shareUrl = '';
+    
+    switch (platform) {
+      case 'twitter':
+        shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+        break;
+      case 'linkedin':
+        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+        break;
+      case 'facebook':
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+        break;
+    }
+    
+    if (shareUrl) {
+      window.open(shareUrl, '_blank', 'width=600,height=400');
+    }
+  };
 
   return (
     <section id="blog" className="section-padding relative" ref={ref}>
@@ -76,7 +123,7 @@ const BlogSection = () => {
 
       {/* Blog Post Modal */}
       <Dialog open={selectedPost !== null} onOpenChange={() => setSelectedPost(null)}>
-        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto bg-card border-border/50 p-0">
+        <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto bg-card border-border/50 p-0">
           {selectedPost && (
             <div>
               {/* Header */}
@@ -96,6 +143,47 @@ const BlogSection = () => {
                 </h2>
 
                 <p className="text-muted-foreground text-sm mb-6">{selectedPost.date}</p>
+
+                {/* Share Buttons */}
+                <div className="flex items-center gap-2 pb-6 border-b border-border/30">
+                  <span className="text-xs text-muted-foreground font-sans flex items-center gap-2">
+                    <Share2 size={14} />
+                    Share:
+                  </span>
+                  <button
+                    onClick={() => handleShare('twitter')}
+                    className="w-8 h-8 rounded-full bg-muted hover:bg-primary/20 flex items-center justify-center transition-colors duration-300 group"
+                    aria-label="Share on Twitter"
+                  >
+                    <Twitter size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                  </button>
+                  <button
+                    onClick={() => handleShare('linkedin')}
+                    className="w-8 h-8 rounded-full bg-muted hover:bg-primary/20 flex items-center justify-center transition-colors duration-300 group"
+                    aria-label="Share on LinkedIn"
+                  >
+                    <Linkedin size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                  </button>
+                  <button
+                    onClick={() => handleShare('facebook')}
+                    className="w-8 h-8 rounded-full bg-muted hover:bg-primary/20 flex items-center justify-center transition-colors duration-300 group"
+                    aria-label="Share on Facebook"
+                  >
+                    <Facebook size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                  </button>
+                  <button
+                    onClick={handleCopyLink}
+                    className="w-8 h-8 rounded-full bg-muted hover:bg-primary/20 flex items-center justify-center transition-colors duration-300 group relative"
+                    aria-label="Copy link"
+                  >
+                    <Link size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                    {copySuccess && (
+                      <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 text-xs bg-primary text-primary-foreground rounded whitespace-nowrap">
+                        Copied!
+                      </span>
+                    )}
+                  </button>
+                </div>
               </div>
 
               {/* Content */}
