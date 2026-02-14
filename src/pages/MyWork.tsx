@@ -74,15 +74,18 @@ const MyWork = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project, index) => (
-              <motion.a
+              <motion.div
                 key={project.title}
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 30 }}
                 animate={isProjectsInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="glass-card p-6 cursor-pointer hover-lift group relative overflow-hidden block"
+                className="glass-card p-6 cursor-pointer hover-lift group relative overflow-hidden"
+                onClick={(e) => {
+                  // Placeholder - prevent navigation until real URLs are added
+                  e.preventDefault();
+                }}
+                role="article"
+                aria-label={`${project.title} - Coming soon`}
               >
                 {/* Glow accent */}
                 <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-primary/5 -translate-y-1/2 translate-x-1/2 group-hover:bg-primary/10 transition-colors duration-700" />
@@ -95,8 +98,16 @@ const MyWork = () => {
                     </h3>
                     <ExternalLink 
                       size={18} 
-                      className="text-muted-foreground group-hover:text-primary transition-colors duration-300 shrink-0 ml-2" 
+                      className="text-muted-foreground/50 group-hover:text-primary/50 transition-colors duration-300 shrink-0 ml-2" 
+                      aria-hidden="true"
                     />
+                  </div>
+
+                  {/* Coming Soon Badge */}
+                  <div className="mb-3">
+                    <span className="px-2 py-0.5 text-[10px] font-sans uppercase tracking-widest bg-muted text-muted-foreground rounded-full">
+                      URL Coming Soon
+                    </span>
                   </div>
 
                   {/* Description */}
@@ -116,7 +127,7 @@ const MyWork = () => {
                     ))}
                   </div>
                 </div>
-              </motion.a>
+              </motion.div>
             ))}
           </div>
         </div>
