@@ -3,7 +3,7 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 
 const milestones = [
-  { year: "Current", title: "Thrive Academy 🎓 & Algorithmics 💻", description: "Currently working at Thrive Academy & Algorithmics in Durbanville, empowering students through education and technology." },
+  { year: "Current", title: "Thrive Academy 🎓 & Algorithmics 💻", description: "Working at Thrive Academy & Algorithmics in Durbanville, empowering students through education and technology." },
   { year: "2023", title: "Trustlink Africa 🔗", description: "Contributed to building digital solutions connecting African businesses and facilitating growth across the continent." },
   { year: "2022", title: "Cyclonic Media 🌪️", description: "Helped create dynamic media experiences and digital content strategies for diverse clients." },
   { year: "2020", title: "Bercliff Estates 🏘️", description: "Supported real estate operations and property management, enhancing client experiences and property value." },

@@ -5,6 +5,9 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { posts } from "@/data/posts";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { generateSlug } from "@/utils/slugify";
+
+type SocialPlatform = 'twitter' | 'linkedin' | 'facebook';
 
 const Blog = () => {
   const ref = useRef(null);
@@ -12,30 +15,24 @@ const Blog = () => {
   const [selectedPost, setSelectedPost] = useState<typeof posts[0] | null>(null);
   const [copySuccess, setCopySuccess] = useState(false);
 
-  // Generate slug from post title
-  const generateSlug = (title: string) => {
-    return title
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
-      .trim();
-  };
-
   // Handle copy link to clipboard
   const handleCopyLink = () => {
     if (selectedPost) {
       const slug = generateSlug(selectedPost.title);
       const url = `${window.location.origin}/blog#${slug}`;
-      navigator.clipboard.writeText(url).then(() => {
-        setCopySuccess(true);
-        setTimeout(() => setCopySuccess(false), 2000);
-      });
+      navigator.clipboard.writeText(url)
+        .then(() => {
+          setCopySuccess(true);
+          setTimeout(() => setCopySuccess(false), 2000);
+        })
+        .catch((err) => {
+          console.error('Failed to copy link:', err);
+        });
     }
   };
 
   // Handle social media sharing
-  const handleShare = (platform: string) => {
+  const handleShare = (platform: SocialPlatform) => {
     if (!selectedPost) return;
     
     const slug = generateSlug(selectedPost.title);
