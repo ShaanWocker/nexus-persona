@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowDown, FileDown, Calendar } from "lucide-react";
+import { Link } from "react-router-dom";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
@@ -81,12 +82,12 @@ const HeroSection = () => {
           transition={{ duration: 1, delay: 0.9 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <a
-            href="#expertise"
+          <Link
+            to="/mywork"
             className="px-8 py-4 bg-primary text-primary-foreground font-sans font-semibold text-sm tracking-wider uppercase rounded-full hover:shadow-[0_0_30px_-5px_hsl(38_65%_55%/0.4)] transition-all duration-500"
           >
             View My Work
-          </a>
+          </Link>
           <a
             href="#cv"
             className="group px-8 py-4 border border-border text-foreground font-sans font-semibold text-sm tracking-wider uppercase rounded-full hover:border-primary/50 transition-all duration-500 flex items-center gap-2"
