@@ -1,78 +1,84 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { ArrowRight, Clock, X, Tag, ChevronLeft } from "lucide-react";
+import { ArrowRight, Clock, Tag } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { posts } from "@/data/posts";
+import Navigation from "@/components/Navigation";
+import Footer from "@/components/Footer";
 
-const BlogSection = () => {
+const Blog = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [selectedPost, setSelectedPost] = useState<typeof posts[0] | null>(null);
 
   return (
-    <section id="blog" className="section-padding relative" ref={ref}>
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="flex flex-col md:flex-row md:items-end justify-between mb-16"
-        >
-          <div>
-            <p className="text-primary text-sm tracking-[0.3em] uppercase mb-4 font-sans">Journal</p>
-            <h2 className="font-serif text-4xl md:text-5xl font-bold">Latest Thoughts</h2>
-          </div>
-          <a
-            href="/blog"
-            className="mt-4 md:mt-0 text-primary font-sans text-sm tracking-wider uppercase flex items-center gap-2 hover:gap-3 transition-all duration-300"
+    <div className="min-h-screen bg-background text-foreground">
+      <Navigation />
+      
+      {/* Hero Section */}
+      <section className="pt-32 pb-16 px-6 md:px-12">
+        <div className="max-w-7xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
           >
-            View All Posts <ArrowRight size={14} />
-          </a>
-        </motion.div>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {posts.map((post, index) => (
-            <motion.article
-              key={post.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-              onClick={() => setSelectedPost(post)}
-              className="glass-card overflow-hidden group cursor-pointer hover-lift"
-            >
-              {/* Colored top bar */}
-              <div className="h-1 bg-gradient-to-r from-primary/60 to-primary" />
-
-              <div className="p-8">
-                <span className="text-primary text-xs font-sans font-semibold tracking-widest uppercase">
-                  {post.category}
-                </span>
-
-                <h3 className="font-serif text-xl font-bold mt-3 mb-3 group-hover:text-primary transition-colors duration-300 leading-snug">
-                  {post.title}
-                </h3>
-
-                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                  {post.excerpt}
-                </p>
-
-                <div className="flex items-center justify-between text-xs text-muted-foreground font-sans">
-                  <span>{post.date}</span>
-                  <span className="flex items-center gap-1">
-                    <Clock size={12} />
-                    {post.readTime}
-                  </span>
-                </div>
-
-                <div className="mt-4 pt-4 border-t border-border/30 flex items-center gap-1 text-primary text-sm font-sans">
-                  <span>Read Article</span>
-                  <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-300" />
-                </div>
-              </div>
-            </motion.article>
-          ))}
+            <p className="text-primary text-sm tracking-[0.3em] uppercase mb-4 font-sans">Journal</p>
+            <h1 className="font-serif text-5xl md:text-6xl font-bold mb-6">All Posts</h1>
+            <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">
+              Insights on technology, education, music, and the creative intersections that drive innovation.
+            </p>
+          </motion.div>
         </div>
-      </div>
+      </section>
+
+      {/* Blog Posts Grid */}
+      <section className="section-padding relative" ref={ref}>
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8">
+            {posts.map((post, index) => (
+              <motion.article
+                key={post.title}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: index * 0.15 }}
+                onClick={() => setSelectedPost(post)}
+                className="glass-card overflow-hidden group cursor-pointer hover-lift"
+              >
+                {/* Colored top bar */}
+                <div className="h-1 bg-gradient-to-r from-primary/60 to-primary" />
+
+                <div className="p-8">
+                  <span className="text-primary text-xs font-sans font-semibold tracking-widest uppercase">
+                    {post.category}
+                  </span>
+
+                  <h3 className="font-serif text-xl font-bold mt-3 mb-3 group-hover:text-primary transition-colors duration-300 leading-snug">
+                    {post.title}
+                  </h3>
+
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                    {post.excerpt}
+                  </p>
+
+                  <div className="flex items-center justify-between text-xs text-muted-foreground font-sans">
+                    <span>{post.date}</span>
+                    <span className="flex items-center gap-1">
+                      <Clock size={12} />
+                      {post.readTime}
+                    </span>
+                  </div>
+
+                  <div className="mt-4 pt-4 border-t border-border/30 flex items-center gap-1 text-primary text-sm font-sans">
+                    <span>Read Article</span>
+                    <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform duration-300" />
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Blog Post Modal */}
       <Dialog open={selectedPost !== null} onOpenChange={() => setSelectedPost(null)}>
@@ -159,8 +165,10 @@ const BlogSection = () => {
           )}
         </DialogContent>
       </Dialog>
-    </section>
+
+      <Footer />
+    </div>
   );
 };
 
-export default BlogSection;
+export default Blog;

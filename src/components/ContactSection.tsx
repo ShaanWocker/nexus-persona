@@ -27,7 +27,10 @@ const ContactSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement form submission
+    // Open mailto link with form data
+    const subject = `Contact Form: ${formData.name}`;
+    const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
+    window.location.href = `mailto:ShaanWocker@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   return (
@@ -115,7 +118,7 @@ const ContactSection = () => {
           >
             {/* Direct email */}
             <a
-              href="mailto:hello@example.com"
+              href="mailto:ShaanWocker@gmail.com"
               className="glass-card p-6 flex items-center gap-4 hover-lift group"
             >
               <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
@@ -124,14 +127,16 @@ const ContactSection = () => {
               <div>
                 <p className="font-sans text-sm text-muted-foreground">Email me directly</p>
                 <p className="font-sans font-medium text-foreground group-hover:text-primary transition-colors">
-                  hello@example.com
+                  ShaanWocker@gmail.com
                 </p>
               </div>
             </a>
 
             {/* Book a call */}
             <a
-              href="#"
+              href="https://calendly.com/shaanwocker"
+              target="_blank"
+              rel="noopener noreferrer"
               className="glass-card p-6 flex items-center gap-4 hover-lift group"
             >
               <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">

@@ -18,6 +18,26 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 const expertise = [
   {
+    icon: Code,
+    title: "Technology & Development",
+    description: "Full-stack development, system architecture, and leveraging technology for creative solutions.",
+    skills: ["Web Development", "System Architecture", "AI/ML", "DevOps"],
+    color: "38 65% 55%",
+    details: {
+      longDescription: "Technology is the thread that weaves all my disciplines together. I build robust, scalable systems that solve real problems — from full-stack web applications to AI-powered tools. My approach emphasizes clean architecture, user-centric design, and leveraging the latest innovations.",
+      highlights: [
+        "Full-stack web development with modern frameworks",
+        "System architecture and cloud infrastructure",
+        "AI/ML integration and automation",
+        "DevOps practices and CI/CD pipelines",
+      ],
+      projects: [
+        { name: "Portfolio Platform", desc: "This very website — a showcase of modern web development with React, Tailwind, and Framer Motion." },
+        { name: "AI-Powered Tools", desc: "Custom tools leveraging machine learning for content generation and data analysis." },
+      ],
+    },
+  },
+  {
     icon: GraduationCap,
     title: "Education & Adult Learning",
     description: "Curriculum design, facilitation, and transformative learning experiences for diverse adult audiences.",
@@ -34,6 +54,26 @@ const expertise = [
       projects: [
         { name: "Digital Learning Platform", desc: "Built a comprehensive LMS for corporate training with adaptive learning paths." },
         { name: "Workshop Series: Future Skills", desc: "A 12-part workshop series preparing professionals for the digital economy." },
+      ],
+    },
+  },
+  {
+    icon: Home,
+    title: "Real Estate",
+    description: "Strategic property investment and development with an eye for value and community impact.",
+    skills: ["Investment", "Property Analysis", "Development", "Market Strategy"],
+    color: "38 65% 55%",
+    details: {
+      longDescription: "My real estate practice focuses on identifying undervalued opportunities and developing properties that enhance communities. I combine analytical market research with creative vision to maximize both financial returns and positive community impact.",
+      highlights: [
+        "Portfolio development across residential and commercial",
+        "Market analysis and investment strategy",
+        "Property renovation and value-add development",
+        "Community-focused development approach",
+      ],
+      projects: [
+        { name: "Residential Portfolio", desc: "Strategic acquisition and renovation of residential properties for long-term value." },
+        { name: "Community Development", desc: "Mixed-use development projects focused on neighborhood revitalization." },
       ],
     },
   },
@@ -98,26 +138,6 @@ const expertise = [
     },
   },
   {
-    icon: Home,
-    title: "Real Estate",
-    description: "Strategic property investment and development with an eye for value and community impact.",
-    skills: ["Investment", "Property Analysis", "Development", "Market Strategy"],
-    color: "38 65% 55%",
-    details: {
-      longDescription: "My real estate practice focuses on identifying undervalued opportunities and developing properties that enhance communities. I combine analytical market research with creative vision to maximize both financial returns and positive community impact.",
-      highlights: [
-        "Portfolio development across residential and commercial",
-        "Market analysis and investment strategy",
-        "Property renovation and value-add development",
-        "Community-focused development approach",
-      ],
-      projects: [
-        { name: "Residential Portfolio", desc: "Strategic acquisition and renovation of residential properties for long-term value." },
-        { name: "Community Development", desc: "Mixed-use development projects focused on neighborhood revitalization." },
-      ],
-    },
-  },
-  {
     icon: Target,
     title: "Competitive Shooting (IPSC)",
     description: "Precision, discipline, and performance under pressure — coming soon.",
@@ -132,26 +152,6 @@ const expertise = [
         "Equipment setup and optimization",
       ],
       projects: [],
-    },
-  },
-  {
-    icon: Code,
-    title: "Technology & Development",
-    description: "Full-stack development, system architecture, and leveraging technology for creative solutions.",
-    skills: ["Web Development", "System Architecture", "AI/ML", "DevOps"],
-    color: "38 65% 55%",
-    details: {
-      longDescription: "Technology is the thread that weaves all my disciplines together. I build robust, scalable systems that solve real problems — from full-stack web applications to AI-powered tools. My approach emphasizes clean architecture, user-centric design, and leveraging the latest innovations.",
-      highlights: [
-        "Full-stack web development with modern frameworks",
-        "System architecture and cloud infrastructure",
-        "AI/ML integration and automation",
-        "DevOps practices and CI/CD pipelines",
-      ],
-      projects: [
-        { name: "Portfolio Platform", desc: "This very website — a showcase of modern web development with React, Tailwind, and Framer Motion." },
-        { name: "AI-Powered Tools", desc: "Custom tools leveraging machine learning for content generation and data analysis." },
-      ],
     },
   },
 ];
