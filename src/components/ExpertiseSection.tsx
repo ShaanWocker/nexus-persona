@@ -6,7 +6,6 @@ import {
   Radio,
   Scissors,
   Home,
-  Target,
   Code,
   ChevronRight,
   X,
@@ -137,23 +136,7 @@ const expertise = [
       ],
     },
   },
-  {
-    icon: Target,
-    title: "Competitive Shooting (IPSC)",
-    description: "Precision, discipline, and performance under pressure — coming soon.",
-    skills: ["Precision", "Discipline", "Competition"],
-    color: "38 65% 55%",
-    placeholder: true,
-    details: {
-      longDescription: "Competitive shooting through IPSC (International Practical Shooting Confederation) represents the ultimate test of precision, speed, and composure. This section is coming soon as I begin my competitive journey.",
-      highlights: [
-        "Training in practical shooting disciplines",
-        "Focus on safety, precision, and mental discipline",
-        "Equipment setup and optimization",
-      ],
-      projects: [],
-    },
-  },
+
 ];
 
 const ExpertiseSection = () => {
@@ -175,7 +158,7 @@ const ExpertiseSection = () => {
           <p className="text-primary text-sm tracking-[0.3em] uppercase mb-4 font-sans">What I Do</p>
           <h2 className="font-serif text-4xl md:text-5xl font-bold mb-6">Areas of Expertise</h2>
           <p className="text-muted-foreground max-w-xl mx-auto text-lg">
-            Seven interconnected disciplines, one cohesive vision.
+            Six interconnected disciplines, one cohesive vision.
           </p>
         </motion.div>
 

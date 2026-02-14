@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { ArrowRight, Clock, Tag } from "lucide-react";
+import { ArrowRight, Clock, Tag, ArrowLeft, Share2, Twitter, Linkedin, Facebook, Link } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { posts } from "@/data/posts";
 import Navigation from "@/components/Navigation";
@@ -10,6 +10,56 @@ const Blog = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [selectedPost, setSelectedPost] = useState<typeof posts[0] | null>(null);
+  const [copySuccess, setCopySuccess] = useState(false);
+
+  // Generate slug from post title
+  const generateSlug = (title: string) => {
+    return title
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .trim();
+  };
+
+  // Handle copy link to clipboard
+  const handleCopyLink = () => {
+    if (selectedPost) {
+      const slug = generateSlug(selectedPost.title);
+      const url = `${window.location.origin}/blog#${slug}`;
+      navigator.clipboard.writeText(url).then(() => {
+        setCopySuccess(true);
+        setTimeout(() => setCopySuccess(false), 2000);
+      });
+    }
+  };
+
+  // Handle social media sharing
+  const handleShare = (platform: string) => {
+    if (!selectedPost) return;
+    
+    const slug = generateSlug(selectedPost.title);
+    const url = `${window.location.origin}/blog#${slug}`;
+    const text = selectedPost.title;
+    
+    let shareUrl = '';
+    
+    switch (platform) {
+      case 'twitter':
+        shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+        break;
+      case 'linkedin':
+        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+        break;
+      case 'facebook':
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+        break;
+    }
+    
+    if (shareUrl) {
+      window.open(shareUrl, '_blank', 'width=600,height=400');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -17,11 +67,28 @@ const Blog = () => {
       
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto text-center">
+        <div className="max-w-7xl mx-auto">
+          {/* Back to Home Button */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-8"
+          >
+            <a
+              href="/"
+              className="text-primary font-sans text-sm tracking-wider uppercase flex items-center gap-2 hover:gap-3 transition-all duration-300 w-fit"
+            >
+              <ArrowLeft size={14} />
+              Back to Home
+            </a>
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
+            className="text-center"
           >
             <p className="text-primary text-sm tracking-[0.3em] uppercase mb-4 font-sans">Journal</p>
             <h1 className="font-serif text-5xl md:text-6xl font-bold mb-6">All Posts</h1>
@@ -82,7 +149,7 @@ const Blog = () => {
 
       {/* Blog Post Modal */}
       <Dialog open={selectedPost !== null} onOpenChange={() => setSelectedPost(null)}>
-        <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto bg-card border-border/50 p-0">
+        <DialogContent className="max-w-4xl max-h-[85vh] overflow-y-auto bg-card border-border/50 p-0">
           {selectedPost && (
             <div>
               {/* Header */}
@@ -102,6 +169,47 @@ const Blog = () => {
                 </h2>
 
                 <p className="text-muted-foreground text-sm mb-6">{selectedPost.date}</p>
+
+                {/* Share Buttons */}
+                <div className="flex items-center gap-2 pb-6 border-b border-border/30">
+                  <span className="text-xs text-muted-foreground font-sans flex items-center gap-2">
+                    <Share2 size={14} />
+                    Share:
+                  </span>
+                  <button
+                    onClick={() => handleShare('twitter')}
+                    className="w-8 h-8 rounded-full bg-muted hover:bg-primary/20 flex items-center justify-center transition-colors duration-300 group"
+                    aria-label="Share on Twitter"
+                  >
+                    <Twitter size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                  </button>
+                  <button
+                    onClick={() => handleShare('linkedin')}
+                    className="w-8 h-8 rounded-full bg-muted hover:bg-primary/20 flex items-center justify-center transition-colors duration-300 group"
+                    aria-label="Share on LinkedIn"
+                  >
+                    <Linkedin size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                  </button>
+                  <button
+                    onClick={() => handleShare('facebook')}
+                    className="w-8 h-8 rounded-full bg-muted hover:bg-primary/20 flex items-center justify-center transition-colors duration-300 group"
+                    aria-label="Share on Facebook"
+                  >
+                    <Facebook size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                  </button>
+                  <button
+                    onClick={handleCopyLink}
+                    className="w-8 h-8 rounded-full bg-muted hover:bg-primary/20 flex items-center justify-center transition-colors duration-300 group relative"
+                    aria-label="Copy link"
+                  >
+                    <Link size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                    {copySuccess && (
+                      <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 text-xs bg-primary text-primary-foreground rounded whitespace-nowrap">
+                        Copied!
+                      </span>
+                    )}
+                  </button>
+                </div>
               </div>
 
               {/* Content */}
