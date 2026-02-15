@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Expertise", href: "#expertise" },
-  { label: "Blog", href: "#blog" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "#about", type: "hash" as const },
+  { label: "Expertise", href: "#expertise", type: "hash" as const },
+  { label: "Blog", href: "/blog", type: "route" as const },
+  { label: "Contact", href: "#contact", type: "hash" as const },
 ];
 
 const Navigation = () => {
@@ -37,15 +38,25 @@ const Navigation = () => {
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-10">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium tracking-wider uppercase text-muted-foreground hover:text-primary transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.type === "route" ? (
+              <Link
+                key={link.href}
+                to={link.href}
+                className="text-sm font-medium tracking-wider uppercase text-muted-foreground hover:text-primary transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-sm font-medium tracking-wider uppercase text-muted-foreground hover:text-primary transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
+              >
+                {link.label}
+              </a>
+            )
+          )}
           <a
             href="#contact"
             className="px-5 py-2 text-sm font-medium tracking-wider uppercase border border-primary/50 text-primary rounded-full hover:bg-primary hover:text-primary-foreground transition-all duration-300"
@@ -74,16 +85,27 @@ const Navigation = () => {
             className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border/50 overflow-hidden"
           >
             <div className="px-6 py-6 flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsMobileOpen(false)}
-                  className="text-lg text-muted-foreground hover:text-primary transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
+              {navLinks.map((link) =>
+                link.type === "route" ? (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    onClick={() => setIsMobileOpen(false)}
+                    className="text-lg text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsMobileOpen(false)}
+                    className="text-lg text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                )
+              )}
             </div>
           </motion.div>
         )}
