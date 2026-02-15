@@ -330,7 +330,7 @@ const ContactSection = () => {
           </DialogHeader>
           <div className="flex justify-center py-4">
             <img
-              src="/images/zello-qr.jpeg"
+              src="/zello-qr.jpeg"
               alt="Zello QR Code"
               className="w-full max-w-sm rounded-lg"
             />
