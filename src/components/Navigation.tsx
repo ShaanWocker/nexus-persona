@@ -20,6 +20,32 @@ const Navigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleHashClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const targetElement = document.getElementById(targetId);
+    
+    if (targetElement) {
+      // Check if user prefers reduced motion
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      
+      targetElement.scrollIntoView({ 
+        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+      });
+      
+      // Update URL hash after scroll is initiated
+      // Using setTimeout to avoid any potential race conditions with scroll
+      setTimeout(() => {
+        window.location.hash = targetId;
+      }, 0);
+      
+      // Close mobile menu if it's open
+      if (isMobileOpen) {
+        setIsMobileOpen(false);
+      }
+    }
+  };
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -51,6 +77,7 @@ const Navigation = () => {
               <a
                 key={link.href}
                 href={link.href}
+                onClick={(e) => handleHashClick(e, link.href)}
                 className="text-sm font-medium tracking-wider uppercase text-muted-foreground hover:text-primary transition-colors duration-300 relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[1px] after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
               >
                 {link.label}
@@ -59,6 +86,7 @@ const Navigation = () => {
           )}
           <a
             href="#contact"
+            onClick={(e) => handleHashClick(e, '#contact')}
             className="px-5 py-2 text-sm font-medium tracking-wider uppercase border border-primary/50 text-primary rounded-full hover:bg-primary hover:text-primary-foreground transition-all duration-300"
           >
             Get in Touch
@@ -99,7 +127,7 @@ const Navigation = () => {
                   <a
                     key={link.href}
                     href={link.href}
-                    onClick={() => setIsMobileOpen(false)}
+                    onClick={(e) => handleHashClick(e, link.href)}
                     className="text-lg text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.label}
