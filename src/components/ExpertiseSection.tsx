@@ -10,8 +10,6 @@ import {
   ChevronRight,
   X,
   ExternalLink,
-  Image as ImageIcon,
-  Play,
 } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 
@@ -252,27 +250,6 @@ const ExpertiseSection = () => {
                   {selected.details.longDescription}
                 </p>
 
-                {/* Image gallery placeholder */}
-                <div>
-                  <h4 className="font-serif text-lg font-semibold mb-4 flex items-center gap-2">
-                    <ImageIcon size={18} className="text-primary" />
-                    Gallery
-                  </h4>
-                  <div className="grid grid-cols-3 gap-3">
-                    {[1, 2, 3].map((i) => (
-                      <div
-                        key={i}
-                        className="aspect-[4/3] rounded-xl bg-muted/50 border border-border/30 flex items-center justify-center group/img cursor-pointer hover:border-primary/30 transition-colors"
-                      >
-                        <div className="text-center">
-                          <ImageIcon size={24} className="mx-auto text-muted-foreground/40 group-hover/img:text-primary/50 transition-colors" />
-                          <span className="text-[10px] text-muted-foreground/40 mt-1 block">Image {i}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
                 {/* Highlights */}
                 <div>
                   <h4 className="font-serif text-lg font-semibold mb-4">Key Highlights</h4>
@@ -308,22 +285,6 @@ const ExpertiseSection = () => {
                     </div>
                   </div>
                 )}
-
-                {/* Video placeholder */}
-                <div>
-                  <h4 className="font-serif text-lg font-semibold mb-4 flex items-center gap-2">
-                    <Play size={18} className="text-primary" />
-                    Video
-                  </h4>
-                  <div className="aspect-video rounded-xl bg-muted/50 border border-border/30 flex items-center justify-center cursor-pointer hover:border-primary/30 transition-colors group/vid">
-                    <div className="text-center">
-                      <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-2 group-hover/vid:bg-primary/20 transition-colors">
-                        <Play size={24} className="text-primary ml-1" />
-                      </div>
-                      <span className="text-xs text-muted-foreground/50">Video coming soon</span>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           )}
