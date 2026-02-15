@@ -26,13 +26,24 @@ const Navigation = () => {
     const targetElement = document.getElementById(targetId);
     
     if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth' });
-      // Update URL hash without jumping
-      window.history.pushState(null, '', href);
+      // Check if user prefers reduced motion
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      
+      targetElement.scrollIntoView({ 
+        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+      });
+      
+      // Update URL hash after scroll is initiated
+      // Using setTimeout to avoid any potential race conditions with scroll
+      setTimeout(() => {
+        window.location.hash = targetId;
+      }, 0);
+      
+      // Close mobile menu if it's open
+      if (isMobileOpen) {
+        setIsMobileOpen(false);
+      }
     }
-    
-    // Close mobile menu after initiating scroll
-    setIsMobileOpen(false);
   };
 
   return (
