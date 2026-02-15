@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { ArrowRight, Clock, X, Tag, ChevronLeft, Share2, Twitter, Linkedin, Facebook, Link } from "lucide-react";
+import { ArrowRight, Clock, X, Tag, ChevronLeft, Share2, Twitter, Linkedin, Facebook, Link as LinkIcon } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { posts } from "@/data/posts";
 import { generateSlug } from "@/utils/slugify";
@@ -69,12 +70,12 @@ const BlogSection = () => {
             <p className="text-primary text-sm tracking-[0.3em] uppercase mb-4 font-sans">Journal</p>
             <h2 className="font-serif text-4xl md:text-5xl font-bold">Latest Thoughts</h2>
           </div>
-          <a
-            href="/blog"
+          <Link
+            to="/blog"
             className="mt-4 md:mt-0 text-primary font-sans text-sm tracking-wider uppercase flex items-center gap-2 hover:gap-3 transition-all duration-300"
           >
             View All Posts <ArrowRight size={14} />
-          </a>
+          </Link>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8">
@@ -176,7 +177,7 @@ const BlogSection = () => {
                     className="w-8 h-8 rounded-full bg-muted hover:bg-primary/20 flex items-center justify-center transition-colors duration-300 group relative"
                     aria-label="Copy link"
                   >
-                    <Link size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                    <LinkIcon size={14} className="text-muted-foreground group-hover:text-primary transition-colors" />
                     {copySuccess && (
                       <span className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 text-xs bg-primary text-primary-foreground rounded whitespace-nowrap">
                         Copied!
